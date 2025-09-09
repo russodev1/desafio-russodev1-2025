@@ -1,10 +1,11 @@
-import {Animal} from './Classes/animal.js';
 
-import {Pessoa} from './Classes/pessoa.js';
+import { Animal } from './Classes/animal.js';
 
-import {ValidadorEntrada} from './Classes/validador-entrada.js';
+import { Pessoa } from './Classes/pessoa.js';
 
-import {animaisData} from './Data/dados.js';
+import { ValidadorEntrada } from './Classes/validador-entrada.js';
+
+import { animaisData } from './Data/dados.js';
 
 class AbrigoAnimais {
 
@@ -52,21 +53,35 @@ class AbrigoAnimais {
 
       const pessoa2Elegivel = pessoa2.eElegivelPorBrinquedos(animal);
 
+      let destino = 'abrigo';
 
-    let destino = 'abrigo';
 
-    const pessoa1PodeAdotar = pessoa1Elegivel && pessoa1.adotados.length < 3;
-    const pessoa2PodeAdotar = pessoa2Elegivel && pessoa2.adotados.length < 3;
 
-    if (pessoa1PodeAdotar && pessoa2PodeAdotar) {
+      if (pessoa1Elegivel && pessoa2Elegivel) {
+
       destino = 'abrigo';
-    } else if (pessoa1PodeAdotar) {
-      pessoa1.adotar(animal);
-      destino = 'pessoa 1';
-    } else if (pessoa2PodeAdotar) {
-      pessoa2.adotar(animal);
-      destino = 'pessoa 2';
-    }
+
+      }
+
+
+
+      else if (pessoa1Elegivel && pessoa1.adotados.length < 3) {
+
+        pessoa1.adotar(animal);
+
+        destino = 'pessoa 1';
+
+      } else if (pessoa2Elegivel && pessoa2.adotados.length < 3) {
+
+        pessoa2.adotar(animal);
+
+        destino = 'pessoa 2';
+
+      } else {
+
+        destino = 'abrigo';
+
+      }
 
 
       resultado.lista.push(`${nome} - ${destino}`);
@@ -80,7 +95,5 @@ class AbrigoAnimais {
   }
 
 }
-
-
 
 export { AbrigoAnimais as AbrigoAnimais };
